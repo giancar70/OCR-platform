@@ -1,0 +1,15 @@
+version: '3.8'
+
+# Frontend stack: Next.js app.
+# Run from the project root:  docker compose -f frontend/docker-compose.yml up -d
+# The backend must be running on port 8000 before starting this.
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
+    ports:
+      - "3000:3000"
