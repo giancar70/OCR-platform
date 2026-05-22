@@ -72,9 +72,9 @@ async def client(db):
     from app.main import app
     app.dependency_overrides[get_db] = override_get_db
 
-    with patch("app.core.storage.ensure_bucket_exists"), \
-         patch("app.core.storage.upload_file"), \
-         patch("app.core.storage.delete_file"), \
+    with patch("app.main.ensure_bucket_exists"), \
+         patch("app.api.documents.upload_file"), \
+         patch("app.api.documents.delete_file"), \
          patch("app.tasks.ocr.process_document.delay") as mock_delay, \
          patch("app.core.pubsub.publish_async", new_callable=AsyncMock), \
          patch("app.tasks.celery_app.celery_app.control.revoke"):
